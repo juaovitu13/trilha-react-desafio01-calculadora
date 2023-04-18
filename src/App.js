@@ -1,4 +1,5 @@
 
+
 import Input from './components/Input';
 import Button from './components/Button';
 
@@ -49,6 +50,36 @@ const App = () => {
 
   }
 
+  const handleMultiplicationNumbers = () => {
+
+    if (firstNumber === '0') {
+      setFirstNumber(String(currentNumber));
+      setCurrentNumber('0')
+      setOperation('*')
+    } else {
+      const mult = Number(firstNumber) * Number(currentNumber);
+      setCurrentNumber(String(mult))
+      setOperation('')
+    }
+
+  }
+
+  const handleDivNumbers = () => {
+
+    if (firstNumber === '0') {
+      console.log("passou por aqui!")
+      setFirstNumber(String(currentNumber));
+      setCurrentNumber('0')
+      setOperation('/')
+    } else {
+      const div = Number(firstNumber) / Number(currentNumber);
+      setCurrentNumber(String(div))
+      setOperation('')
+    }
+
+  }
+
+
   const handleEquals = () => {
 
     if(firstNumber !== '0' && operation !== '' && currentNumber !== '0'){
@@ -58,6 +89,12 @@ const App = () => {
             break;
           case '-':
             handleMinusNumbers();
+            break;
+          case '*':
+            handleMultiplicationNumbers();
+            break
+          case '/':
+            handleDivNumbers();
             break;
           default: 
             break;
@@ -71,8 +108,8 @@ const App = () => {
       <Content>
         <Input value={currentNumber}/>
         <Row>
-          <Button label="x"/>
-          <Button label="/"/>
+          <Button label="x" onClick={handleMultiplicationNumbers}/>
+          <Button label="/" onClick={handleDivNumbers}/>
           <Button label="c" onClick={handleOnClear}/>
           <Button label="."/>
         </Row>
